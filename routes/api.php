@@ -14,6 +14,10 @@ Route::post('/login', [AuthController::class, 'login']);
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Dashboard
+    Route::get('/dashboard', DashboardController::class);
+
     // Projects Module
     Route::apiResource('projects', ProjectController::class);
 
