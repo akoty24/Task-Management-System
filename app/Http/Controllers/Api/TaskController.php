@@ -26,13 +26,10 @@ class TaskController extends Controller
     public function index(Request $request, int $projectId): JsonResponse
     {
         try {
-            $filters = $request->only(['status', 'priority', 'search']);
+            $filters = $request->only(['status', 'priority', 'search', 'per_page']);
             $tasks = $this->taskService->listTasksForProject($projectId, Auth::user()->id, $filters);
 
-            return $this->success(
-                TaskResource::collection($tasks),
-                'Tasks retrieved successfully'
-            );
+            return $this->paginated($tasks, 'Tasks retrieved successfully');
         } catch (\Exception $e) {
             $statusCode = $e->getCode() === 404 ? 404 : 500;
             return $this->error($e->getMessage(), $statusCode);

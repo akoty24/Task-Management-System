@@ -33,7 +33,8 @@ class TaskRepository implements TaskRepositoryInterface
             $query->where('title', 'like', '%' . $filters['search'] . '%');
         }
 
-        return $query->latest()->get();
+        $perPage = $filters['per_page'] ?? 15;
+        return $query->latest()->paginate($perPage);
     }
 
     public function findForProject(int $id, int $projectId): ?Task

@@ -1,4 +1,101 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Management System
+
+## Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd task-management-system
+   ```
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
+3. **Install frontend assets (if using Vite)**
+   ```bash
+   npm install
+   npm run dev
+   ```
+4. **Generate application key**
+   ```bash
+   php artisan key:generate
+   ```
+5. **Run database migrations**
+   ```bash
+   php artisan migrate
+   ```
+6. **Seed the database with sample data**
+   ```bash
+   php artisan db:seed
+   ```
+7. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
+
+## Environment Setup
+
+Create a copy of the example environment file and configure your environment variables:
+```bash
+cp .env.example .env
+```
+Edit `.env` and set the following variables as needed:
+
+- `APP_NAME` – Application name.
+- `APP_ENV` – `local` for development.
+- `APP_KEY` – Generated in step 4.
+- `APP_DEBUG` – `true` for local development.
+- `APP_URL` – URL where the app will be accessed (e.g., `http://localhost:8000`).
+- `DB_CONNECTION` – Database driver (e.g., `mysql`).
+- `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` – Your database credentials.
+- `MAIL_MAILER`, `MAIL_HOST`, etc. – Mail configuration if you need email notifications.
+
+After updating the file, run:
+```bash
+php artisan config:cache
+```
+
+## API Documentation
+
+All API routes are defined in `routes/api.php` and are prefixed with `/api`.
+
+### Authentication
+- The API expects an authenticated user (via Laravel Sanctum or Passport). Adjust middleware as needed.
+
+### Endpoints
+| Method | URI | Description |
+|--------|-----|-------------|
+| `GET` | `/api/projects` | List all projects (supports pagination via `?page=` and `?per_page=`). |
+| `POST` | `/api/projects` | Create a new project.
+| `GET` | `/api/projects/{id}` | Retrieve a single project.
+| `PUT/PATCH` | `/api/projects/{id}` | Update a project.
+| `DELETE` | `/api/projects/{id}` | Soft‑delete a project.
+| `GET` | `/api/projects/{projectId}/tasks` | List tasks for a project (supports pagination and filters: `status`, `priority`, `search`, `per_page`). |
+| `POST` | `/api/projects/{projectId}/tasks` | Create a new task under a project.
+| `GET` | `/api/tasks/{id}` | Retrieve a single task.
+| `PUT/PATCH` | `/api/tasks/{id}` | Update a task.
+| `DELETE` | `/api/tasks/{id}` | Soft‑delete a task.
+
+All responses follow a unified JSON structure provided by the `ApiResponse` helper, e.g.:
+```json
+{
+  "success": true,
+  "message": "Tasks retrieved successfully",
+  "data": [...],
+  "meta": {
+    "current_page": 1,
+    "last_page": 5,
+    "per_page": 15,
+    "total": 73,
+    "from": 1,
+    "to": 15
+  }
+}
+```
+Error responses contain `success: false`, `message`, and optionally `errors` and `error_code`.
+
+---
+*Feel free to expand this documentation with request payload schemas and additional details.*
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -50,6 +147,10 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[OP.GG](https://op.gg)**
 
 ## Contributing
+
+## Postman Collection
+
+The Postman collection for this API is available in the project root: [task_mangament_system.postman_collection.json](file:///c:/Mohamed%20Saber/New%20folder/task-management-system/task_mangament_system.postman_collection.json)
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 

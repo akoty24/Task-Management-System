@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('priority')->default(TaskPriority::MEDIUM->value);
             $table->string('status')->default(TaskStatus::TODO->value);
             $table->date('due_date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

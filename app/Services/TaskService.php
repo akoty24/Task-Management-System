@@ -21,7 +21,7 @@ class TaskService
         $this->projectRepository = $projectRepository;
     }
 
-    public function listTasksForProject(int $projectId, int $userId, array $filters = []): Collection
+    public function listTasksForProject(int $projectId, int $userId, array $filters = []): \Illuminate\Pagination\LengthAwarePaginator
     {
         $project = $this->projectRepository->findForUser($projectId, $userId);
 
